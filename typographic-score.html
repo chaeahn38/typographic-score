@@ -7,6 +7,13 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap");
 
+      @font-face {
+        font-family: "Score";
+        src: url("Score-Regular.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -288,12 +295,16 @@
         <input type="range" id="lineHeightSlider" min="0" max="150" value="90" />
         <span class="val" id="lineHeightVal">0.9</span>
       </div>
+      <div class="param">
+        <button class="btn active" id="fontScoreBtn">Score</button>
+        <button class="btn" id="fontIBMBtn">IBM Mono</button>
+      </div>
     </div>
 
     <div class="canvas-area">
       <canvas id="mainCanvas"></canvas>
       <div class="scan-info" id="scanInfo">Ready</div>
-      <div class="font-name-tag" id="fontNameTag">IBM Plex Mono</div>
+      <div class="font-name-tag" id="fontNameTag">Score</div>
     </div>
 
     <div class="font-drop-border" id="fontDropBorder"></div>
@@ -444,12 +455,8 @@
         const h = Math.floor(Math.random() * 360);
         return `hsl(${h}, 100%, 55%)`;
       }
-      const LINE_COLORS = [randomVividColor(), randomVividColor(), randomVividColor()];
-      const LINE_DEFAULTS = [
-        { text: "    m   m   m   m", char: "sine" },
-        { text: "  E   E   E   E   E ", char: "tri" },
-        { text: ",,,,,,,,,,,,,,,,,,,", char: "sub" },
-      ];
+      const LINE_COLORS = [randomVividColor()];
+      const LINE_DEFAULTS = [{ text: "FOe  MeFCMMEFPO", char: "vform" }];
 
       // ─── State ────────────────────────────────────────────────────────────────────
 
@@ -485,8 +492,8 @@
         wetGain = null;
 
       // Font state
-      let currentFontFamily = '"IBM Plex Mono", monospace';
-      let currentFontName = "IBM Plex Mono";
+      let currentFontFamily = '"Score"';
+      let currentFontName = "Score";
 
       // ─── DOM refs ─────────────────────────────────────────────────────────────────
 
@@ -503,6 +510,27 @@
       const scanInfo = document.getElementById("scanInfo");
       const fontNameTag = document.getElementById("fontNameTag");
       const linesBar = document.getElementById("linesBar");
+      const fontScoreBtn = document.getElementById("fontScoreBtn");
+      const fontIBMBtn = document.getElementById("fontIBMBtn");
+
+      const FONTS = {
+        score: { family: '"Score"', name: "Score" },
+        ibm: { family: '"IBM Plex Mono", monospace', name: "IBM Plex Mono" },
+      };
+
+      function switchFont(key) {
+        const f = FONTS[key];
+        currentFontFamily = f.family;
+        currentFontName = f.name;
+        fontNameTag.textContent = f.name;
+        lines.forEach((l) => { if (l._input) l._input.style.fontFamily = f.family; });
+        fontScoreBtn.classList.toggle("active", key === "score");
+        fontIBMBtn.classList.toggle("active", key === "ibm");
+        if (!isPlaying) renderText();
+      }
+
+      fontScoreBtn.addEventListener("click", () => switchFont("score"));
+      fontIBMBtn.addEventListener("click", () => switchFont("ibm"));
 
       // ─── Build line UI rows ───────────────────────────────────────────────────────
 
@@ -841,7 +869,12 @@
           line.zoneTop = midY - zoneH / 2;
           line.offsetX = LEFT_MARGIN;
 
-          const metrics = ctx.measureText(text || " ");
+          const metrics = ctx.measureText(text || "O");
+          const ascent = metrics.actualBoundingBoxAscent || fontSize * 0.75;
+          const descent = metrics.actualBoundingBoxDescent || fontSize * 0.25;
+          const pad = fontSize * 0.15;
+          line.zoneTop = midY - ascent - pad;
+          line.zoneH = ascent + descent + pad * 2;
           line.textWidth = text ? Math.ceil(metrics.width) : 0;
 
           if (text) {
@@ -1135,7 +1168,7 @@
       });
 
       window.addEventListener("resize", resizeCanvas);
-      resizeCanvas();
+      document.fonts.ready.then(() => resizeCanvas());
     </script>
   </body>
 </html>
