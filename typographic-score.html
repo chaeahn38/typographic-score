@@ -458,7 +458,7 @@
       }
       const LINE_COLORS = [randomVividColor(), randomVividColor(), randomVividColor()];
       const LINE_DEFAULTS = [
-        { text: "FOe  MeFCMMEFPO", char: "sine" },
+        { text: "ACDEFHJOQ", char: "sine" },
         { text: "", char: "tri" },
         { text: "", char: "sub" },
       ];
@@ -862,7 +862,7 @@
         ctx.fillStyle = "#0a0a0a";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.font = `bold ${fontSize}px ${currentFontFamily}`;
+        ctx.font = `${fontSize}px ${currentFontFamily}`;
         ctx.textBaseline = "middle";
         ctx.textAlign = "left";
 
@@ -1025,7 +1025,7 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         const fontSize = parseInt(sizeSlider.value);
-        ctx.font = `bold ${fontSize}px ${currentFontFamily}`;
+        ctx.font = `${fontSize}px ${currentFontFamily}`;
         ctx.letterSpacing = parseInt(trackingSlider.value) + "px";
         ctx.textBaseline = "middle";
         ctx.textAlign = "left";
@@ -1175,7 +1175,7 @@
       });
 
       window.addEventListener("resize", resizeCanvas);
-      document.fonts.ready.then(() => resizeCanvas());
+      document.fonts.load(`bold 40px "Score"`).then(() => resizeCanvas()).catch(() => resizeCanvas());
     </script>
   </body>
 </html>
