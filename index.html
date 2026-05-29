@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Score</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Score" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  </head>
+  <body>
+    <div class="toolbar">
+      <span class="logo">Score</span>
+      <div class="sep"></div>
+      <button class="tool-btn active" id="toolPen" title="Freehand pen — pause to grow circle">●</button>
+      <button class="tool-btn" id="toolSelect" title="Select — click or drag">↖</button>
+      <div class="sep"></div>
+      <button class="btn" id="typeModeBtn">Type</button>
+      <button class="btn" id="bwBtn">BW</button>
+      <div class="sep"></div>
+      <button class="btn" id="playBtn">Play</button>
+      <button class="btn" id="clearBtn">Clear</button>
+      <button class="btn" id="saveBtn">Save</button>
+      <button class="btn" id="loadBtn">Load</button>
+      <input type="file" id="loadInput" accept=".json" style="display: none" />
+      <span class="glyph-keys" id="glyphKeys"></span>
+      <div class="sep"></div>
+      <div class="slider-wrap">
+        <label>Zoom</label>
+        <input type="range" id="zoomSlider" min="1" max="100" value="100" step="1" />
+        <span id="zoom-label">100%</span>
+      </div>
+      <div class="slider-wrap">
+        <label>Speed</label>
+        <input type="range" id="speedSlider" min="4" max="8" value="6" step="1" />
+      </div>
+    </div>
+
+    <div id="sketch-container">
+      <div class="tri-count" id="triCount"></div>
+    </div>
+
+    <div id="glyphPrompt">
+      <div class="glyph-dialog">
+        <div class="glyph-dialog-label">Assign selected shapes to character</div>
+        <input id="glyphInput" maxlength="1" autocomplete="off" spellcheck="false" />
+        <div class="glyph-dialog-hint">A – Z · a – z · ? ! . , -</div>
+      </div>
+    </div>
+
+    <div id="overwritePrompt">
+      <div class="glyph-dialog">
+        <div class="glyph-dialog-label">"<span id="overwriteChar"></span>" is already saved. Overwrite?</div>
+        <div class="overwrite-btns">
+          <button class="btn" id="overwriteConfirmBtn">Overwrite</button>
+          <button class="btn" id="overwriteCancelBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script-1.js"></script>
+    <script src="script-2.js"></script>
+    <script src="script-3.js"></script>
+    <script src="script-4.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js');
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica", sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 20px;
+  border-bottom: 1px solid #000000;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-family: Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.sep {
+  width: 1px;
+  height: 18px;
+}
+
+.tool-group {
+  display: flex;
+  gap: 4px;
+}
+
+.tool-btn {
+  border: 1px solid #000;
+  font-size: 14px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.12s;
+  border-radius: 2px;
+  line-height: 1;
+  position: relative;
+}
+
+.tool-btn:hover {
+  background-color: #707070;
+  color: #ffffff;
+}
+
+.tool-btn.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+.tool-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn {
+  border: 1px solid #000;
+  color: #000000;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: all 0.12s;
+  font-weight: 400;
+}
+
+.btn:hover {
+  background-color: #707070;
+  color: #ffffff;
+}
+
+.btn.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+.btn.active-type {
+  background: #000000;
+  color: #fff;
+}
+
+.btn.active-bw {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.glyph-keys {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.slider-wrap label {
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.slider-wrap input[type="range"] {
+  width: 50px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1px;
+  background: #000000;
+  outline: none;
+}
+
+.slider-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 8px;
+  background: #000000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#zoom-label {
+  font-size: 8px;
+  color: #000000;
+  letter-spacing: 1px;
+  min-width: 28px;
+}
+
+#sketch-container {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+  min-height: 0;
+}
+
+#sketch-container canvas {
+  display: block !important;
+}
+
+.tri-count {
+  position: fixed;
+  bottom: 14px;
+  right: 20px;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #000000;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+#glyphPrompt {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92);
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+#glyphPrompt.visible {
+  display: flex;
+}
+
+.glyph-dialog {
+  border: 1px solid #000000;
+  padding: 28px 44px;
+  text-align: center;
+}
+
+.glyph-dialog-label {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #000000;
+  margin-bottom: 18px;
+}
+
+#glyphInput {
+  font-family: Helvetica, sans-serifs;
+  font-size: 48px;
+  width: 72px;
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid #000000;
+  outline: none;
+  color: #000000;
+  background: transparent;
+}
+
+.glyph-dialog-hint {
+  margin-top: 14px;
+  font-size: 7px;
+  color: #000000;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+#overwritePrompt {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92);
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+#overwritePrompt.visible {
+  display: flex;
+}
+
+.overwrite-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
