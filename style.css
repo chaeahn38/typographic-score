@@ -17,12 +17,31 @@ body {
 .toolbar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
   padding: 9px 20px;
   border-bottom: 1px solid #000000;
   flex-shrink: 0;
-  flex-wrap: wrap;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.toolbar-center {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .logo {
@@ -56,6 +75,12 @@ body {
   border-radius: 2px;
   line-height: 1;
   position: relative;
+  outline: none;
+}
+
+.tool-btn:focus,
+.btn:focus {
+  outline: none;
 }
 
 .tool-btn:hover {
@@ -69,8 +94,8 @@ body {
 }
 
 .tool-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 30px;
 }
 
 .btn {
@@ -109,10 +134,7 @@ body {
 }
 
 .glyph-keys {
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: #000000;
-  white-space: nowrap;
+  display: none;
 }
 
 .slider-wrap {
@@ -153,10 +175,47 @@ body {
   min-width: 28px;
 }
 
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  width: 24px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: background 0.12s;
+  outline: none;
+}
+
+.icon-btn img {
+  width: 18px;
+  height: auto;
+  display: block;
+}
+
+.icon-btn:hover {
+  background: #707070;
+}
+
+.icon-btn:hover img {
+  filter: invert(1);
+}
+
+.icon-btn.active {
+  background: #000;
+}
+
+.icon-btn.active img {
+  filter: invert(1);
+}
+
 #sketch-container {
   flex: 1;
   position: relative;
-  overflow: auto;
+  overflow: hidden;
   min-height: 0;
 }
 

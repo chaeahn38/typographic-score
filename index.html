@@ -9,36 +9,57 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Score" />
-    <link rel="apple-touch-icon" href="icon.svg" />
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.3/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
   </head>
   <body>
     <div class="toolbar">
-      <span class="logo">Score</span>
-      <div class="sep"></div>
-      <button class="tool-btn active" id="toolPen" title="Freehand pen — pause to grow circle">●</button>
-      <button class="tool-btn" id="toolSelect" title="Select — click or drag">↖</button>
-      <div class="sep"></div>
-      <button class="btn" id="typeModeBtn">Type</button>
-      <button class="btn" id="bwBtn">BW</button>
-      <div class="sep"></div>
-      <button class="btn" id="playBtn">Play</button>
-      <button class="btn" id="clearBtn">Clear</button>
-      <button class="btn" id="saveBtn">Save</button>
-      <button class="btn" id="loadBtn">Load</button>
-      <input type="file" id="loadInput" accept=".json" style="display: none" />
-      <span class="glyph-keys" id="glyphKeys"></span>
-      <div class="sep"></div>
-      <div class="slider-wrap">
-        <label>Zoom</label>
-        <input type="range" id="zoomSlider" min="1" max="100" value="100" step="1" />
-        <span id="zoom-label">100%</span>
+      <div class="toolbar-left">
+        <button class="icon-btn active" id="toolPen" title="Freehand pen">
+          <img src="icon/Pen.svg" alt="Pen" />
+        </button>
+        <button class="icon-btn" id="toolSelect" title="Select">
+          <img src="icon/Select.svg" alt="Select" />
+        </button>
+        <div class="sep"></div>
+        <button class="icon-btn" id="typeModeBtn" title="Type (⌥T)">
+          <img src="icon/Type.svg" alt="Type" />
+        </button>
+        <button class="icon-btn" id="bwBtn" title="Color">
+          <img src="icon/BW.svg" alt="Color" />
+        </button>
+        <div class="sep"></div>
+        <button class="icon-btn" id="playBtn" title="Play (⌥P)">
+          <img src="icon/Play.svg" alt="Play" />
+        </button>
+        <button class="icon-btn" id="clearBtn" title="Clear (⌥D)">
+          <img src="icon/Clear.svg" alt="Clear" />
+        </button>
+        <input type="file" id="loadInput" accept=".json" style="display: none" />
+        <span class="glyph-keys" id="glyphKeys"></span>
       </div>
-      <div class="slider-wrap">
-        <label>Speed</label>
-        <input type="range" id="speedSlider" min="4" max="8" value="6" step="1" />
+
+      <div class="toolbar-center">
+        <button class="icon-btn active" id="fontRegular" title="Regular">
+          <img src="icon/Regular.svg" alt="Regular" />
+        </button>
+        <button class="icon-btn" id="fontBold" title="Bold">
+          <img src="icon/Bold.svg" alt="Bold" />
+        </button>
+        <button class="icon-btn" id="fontLine" title="Line">
+          <img src="icon/Line.svg" alt="Line" />
+        </button>
+        <button class="icon-btn" id="fontDot" title="Dot">
+          <img src="icon/Dot.svg" alt="Dot" />
+        </button>
+      </div>
+
+      <div class="toolbar-right">
+        <div class="slider-wrap">
+          <label>Tracking</label>
+          <input type="range" id="trackingSlider" min="-80" max="20" value="10" step="2" />
+        </div>
       </div>
     </div>
 
@@ -56,7 +77,9 @@
 
     <div id="overwritePrompt">
       <div class="glyph-dialog">
-        <div class="glyph-dialog-label">"<span id="overwriteChar"></span>" is already saved. Overwrite?</div>
+        <div class="glyph-dialog-label">
+          "<span id="overwriteChar"></span>" is already saved. Overwrite?
+        </div>
         <div class="overwrite-btns">
           <button class="btn" id="overwriteConfirmBtn">Overwrite</button>
           <button class="btn" id="overwriteCancelBtn">Cancel</button>
@@ -64,13 +87,18 @@
       </div>
     </div>
 
-    <script src="script-1.js"></script>
-    <script src="script-2.js"></script>
-    <script src="script-3.js"></script>
-    <script src="script-4.js"></script>
+    <textarea
+      id="typeCapture"
+      style="position: fixed; left: -9999px; width: 1px; height: 1px; opacity: 0"
+      tabindex="-1"
+      autocomplete="off"
+      spellcheck="false"
+    ></textarea>
+
+    <script src="main.js"></script>
     <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js');
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js");
       }
     </script>
   </body>
