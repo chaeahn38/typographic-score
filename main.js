@@ -154,6 +154,7 @@ function triggerShape(s, freq) {
   if (!slot) return;
   slot.busy = true;
   slot.shapeId = s.id;
+  slot.synth.volume.value = fontMode === "bold" ? 14 : 6;
   slot.synth.triggerAttack(Tone.Frequency(freq, "hz").toNote());
   activeSounds[s.id] = { pool, slot, type: s.type, lastFreq: freq };
 }
@@ -176,6 +177,7 @@ function releaseShape(id) {
   setTimeout(() => {
     active.slot.busy = false;
     active.slot.shapeId = null;
+    active.slot.synth.volume.value = 6;
   }, 1800);
   delete activeSounds[id];
 }
@@ -1360,7 +1362,15 @@ new p5(function (p) {
 
   p.windowResized = function () {
     const cont = document.getElementById("sketch-container");
-    scoreCenterX = Math.round(cont.clientWidth / 2);
+    const newSCX = Math.round(cont.clientWidth / 2);
+    const dx = newSCX - scoreCenterX;
+    if (dx !== 0) {
+      for (const s of shapes) offsetShapeXInPlace(s, dx);
+      if (typeCursorY !== null) typeCursorX += dx;
+    }
+    scoreCenterX = newSCX;
+    logicalW = cont.clientWidth;
+    logicalH = cont.clientHeight;
     pRef.resizeCanvas(cont.clientWidth, cont.clientHeight);
     pgDirty = true;
   };
