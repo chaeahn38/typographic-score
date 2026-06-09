@@ -1,10 +1,11 @@
-const CACHE = "score-v1";
+const CACHE = "score-v2";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
   "./main.js",
   "./score.json",
+  "./manifest.json",
   "./icon/Pen.svg",
   "./icon/Select.svg",
   "./icon/Type.svg",
@@ -15,6 +16,10 @@ const ASSETS = [
   "./icon/Bold.svg",
   "./icon/Line.svg",
   "./icon/Dot.svg",
+  "./font/Score-Regular.otf",
+  "./font/Score-Bold.otf",
+  "./font/Score-Line.otf",
+  "./font/Score-Dots.otf",
   "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.3/p5.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"
 ];
